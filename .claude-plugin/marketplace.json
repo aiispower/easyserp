@@ -1,0 +1,24 @@
+{
+  "name": "easy-search-tools",
+  "owner": {
+    "name": "aiispower"
+  },
+  "metadata": {
+    "description": "Related AI search tools: easyserp API search and free easybrSearch browser research."
+  },
+  "plugins": [
+    {
+      "name": "easyserp",
+      "source": "./",
+      "description": "Google and Bing search with source links and bounded retry. Companion to free easybrSearch."
+    },
+    {
+      "name": "easybr-search",
+      "source": {
+        "source": "github",
+        "repo": "aiispower/easybrSearch"
+      },
+      "description": "Free browser search and source reading across web and media platforms."
+    }
+  ]
+}

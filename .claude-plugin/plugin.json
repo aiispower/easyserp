@@ -1,0 +1,17 @@
+{
+  "name": "easyserp",
+  "version": "1.0.0",
+  "description": "Google and Bing search with source links and bounded retry. Companion to free easybrSearch.",
+  "author": {
+    "name": "aiispower"
+  },
+  "homepage": "https://serp.skyvora.cc",
+  "repository": "https://github.com/aiispower/easyserp",
+  "license": "MIT",
+  "keywords": [
+    "search",
+    "google",
+    "bing",
+    "easybrSearch"
+  ]
+}
