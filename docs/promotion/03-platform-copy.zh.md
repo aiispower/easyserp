@@ -6,20 +6,18 @@ content_type: short-form launch copy
 
 ![easybrSearch 与 easyserp 产品组合图](../../assets/easy-search-family-banner.png)
 
-## 小红书（约 300–500 字）
+## 小红书（约 200–400 字）
 
-做资料整理时，我会先分清两件事：要跨网站找线索、读网页，还是要稳定调用 Google/Bing 搜索。
+想查“其他模型如何做类似的代码动画”？可以先用 easybrSearch 在浏览器能访问的平台找线索、挑选页面阅读；它免费，不需要 easyserp API key，也不消耗 easyserp 搜索额度。问题明确后，再用 easyserp 搜索 Google 或 Bing，结果带来源链接，也能按域名限制来源。适合先找案例，再收窄问题、按来源过滤。
 
-easybrSearch 是免费的浏览器研究 Skill/CLI，复用已连接的浏览器，适合按指定平台找内容、挑选来源、阅读页面。它不需要 easyserp 的 API key，也不消耗 easyserp 的搜索额度。源码：[GitHub](https://github.com/aiispower/easybrSearch)｜[Gitee](https://gitee.com/xxjrq/easybrSearch)
+easyserp 服务支持 2000 QPS。注册 [控制台](https://serp.skyvora.cc)一次赠送 1000 次搜索，后续 ¥2/1000 次。先创建 API key，再配置给 Agent。搜索摘要用来找候选，引用前记得打开来源页面核对。
 
-easyserp 面向结构化、可重复的 Google 和 Bing 搜索，可通过 Skill、CLI、本地 MCP 或 API 使用。服务支持 2000 QPS；在 [控制台](https://serp.skyvora.cc)注册赠送 1000 次搜索（一次性，不是每月），后续 ¥2/1000 次。
-
-一个简单做法：先用 easybrSearch 找到并阅读相关页面，再用 easyserp 补充 Google/Bing 搜索。整理答案时，分清已读页面与搜索线索。两个工具独立，按任务选择即可。
+源码：[easyserp GitHub](https://github.com/aiispower/easyserp) · [Gitee](https://gitee.com/xxjrq/easyserp)；[easybrSearch GitHub](https://github.com/aiispower/easybrSearch) · [Gitee](https://gitee.com/xxjrq/easybrSearch)。Claude Code 用户可从 easyserp 仓库的 `easy-search-tools` marketplace 安装两个 Skill。
 
 ## 微博
 
-一个做跨站浏览器研究，一个做结构化 Google/Bing 搜索：免费开源的 easybrSearch + 按量计费的 easyserp。easyserp 支持 2000 QPS，注册一次送 1000 次，之后 ¥2/1000 次。两者独立，按需组合：[控制台](https://serp.skyvora.cc)
+跨站找线索、阅读页面，用免费的 easybrSearch；要结构化地搜索 Google/Bing，用 easyserp。easyserp 注册一次送 1000 次，之后 ¥2/1000 次，支持 2000 QPS。先到[控制台](https://serp.skyvora.cc)创建 API key。源码：[easyserp GitHub](https://github.com/aiispower/easyserp)｜[Gitee](https://gitee.com/xxjrq/easyserp)，[easybrSearch GitHub](https://github.com/aiispower/easybrSearch)｜[Gitee](https://gitee.com/xxjrq/easybrSearch)。
 
 ## English launch post
 
-Two search jobs, two focused tools. **easybrSearch** is a free, open-source browser research Skill and CLI for exploring browser-visible sites and reading selected pages. **easyserp** provides structured Google and Bing search through a Skill, CLI, local MCP, or API. The hosted service supports 2,000 QPS; registration includes a one-time gift of 1,000 searches, followed by ¥2 per 1,000 searches. The products are independent: easybrSearch does not require or consume easyserp credits. Start at the [easyserp console](https://serp.skyvora.cc), or explore easybrSearch on [GitHub](https://github.com/aiispower/easybrSearch) and [Gitee](https://gitee.com/xxjrq/easybrSearch). Search snippets are leads; verify source pages before treating them as read evidence.
+Explore browser-visible sites and read selected pages with free [easybrSearch](https://github.com/aiispower/easybrSearch); use [easyserp](https://github.com/aiispower/easyserp) for structured Google and Bing search with source-domain filters. easybrSearch does not require an easyserp key or consume its search credits. easyserp supports 2,000 QPS; registration includes a one-time 1,000-search gift, then costs ¥2 per 1,000 searches. [Create an account and API key](https://serp.skyvora.cc). Treat snippets as leads and verify source pages before citing them.

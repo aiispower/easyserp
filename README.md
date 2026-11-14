@@ -6,7 +6,7 @@
 
 用 Google 和 Bing 搜索 API，为 AI Agent 和自动化任务提供结构化网页结果。支持 **2000 QPS**；在 [控制台](https://serp.skyvora.cc)注册一次赠送 **1000 次搜索**，之后 **¥2/1000 次**。赠送额度为一次性，不是每月额度。
 
-[GitHub](https://github.com/aiispower/easyserp) · [Download Skill ZIP](https://github.com/aiispower/easyserp/releases) · [Free easybrSearch](https://github.com/aiispower/easybrSearch)
+[GitHub](https://github.com/aiispower/easyserp) · [Gitee](https://gitee.com/xxjrq/easyserp) · [1.0.0 下载](https://github.com/aiispower/easyserp/releases/tag/v1.0.0) · [免费 easybrSearch](https://github.com/aiispower/easybrSearch)
 
 ## Claude Code 直接安装
 
@@ -19,6 +19,12 @@ claude plugin install easybr-search@easy-search-tools
 ```
 
 需要 Node.js。easyserp 首次使用在控制台注册并配置 API key；easybrSearch 使用已有浏览器连接，完全免费。
+
+## Claude Desktop / MCP
+
+从 [1.0.0 下载页](https://github.com/aiispower/easyserp/releases/tag/v1.0.0)获取 `easyserp-1.0.0.mcpb`，在支持 MCPB 的客户端导入，配置 API key 后即可使用。包内已包含运行依赖，需要 Node.js 20+。详细步骤见 [MCPB 安装说明](docs/MCPB.md)。
+
+已发布到 [MCP 官方目录](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.aiispower%2Feasyserp/versions/1.0.0)，版本 `1.0.0`。
 
 ## 开始使用
 
@@ -56,5 +62,7 @@ node src/cli.mjs request REQUEST_ID
 HTTP API、MCP stdio、本地安装与 SDK 说明见[集成指南](docs/INTEGRATIONS.md)；完整字段和恢复约定见 [API 参考](docs/API.md)。SDK 是给开发者的可选集成方式，普通用户优先使用 Skill 或 CLI。
 
 开源客户端、CLI、MCP 适配器和 Skill 使用 MIT 许可；托管搜索服务按量计费。市场提交及上架状态见[渠道与发布材料](docs/MARKETPLACE.md)，仅在实际提交后更新。
+
+介绍与示例：[产品组合介绍](docs/promotion/01-search-family.zh.md) · [Claude/Codex 接入教程](docs/promotion/02-claude-codex-search.zh.md) · [各平台短文案](docs/promotion/03-platform-copy.zh.md)。
 
 English: [README.en.md](README.en.md).

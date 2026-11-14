@@ -6,7 +6,23 @@
 
 Google and Bing search API for structured web results in AI agent and automation workflows. It supports **2,000 QPS**. Registration at the [console](https://serp.skyvora.cc) includes a **one-time gift of 1,000 searches**, followed by **¥2 per 1,000 searches**. The gift is not a monthly allowance.
 
-[GitHub](https://github.com/aiispower/easyserp) · [Download Skill ZIP](https://github.com/aiispower/easyserp/releases) · [Free easybrSearch](https://github.com/aiispower/easybrSearch)
+[GitHub](https://github.com/aiispower/easyserp) · [Gitee](https://gitee.com/xxjrq/easyserp) · [1.0.0 downloads](https://github.com/aiispower/easyserp/releases/tag/v1.0.0) · [Free easybrSearch](https://github.com/aiispower/easybrSearch)
+
+## Claude Code
+
+Install both related Skills from the public marketplace:
+
+```sh
+claude plugin marketplace add aiispower/easyserp
+claude plugin install easyserp@easy-search-tools
+claude plugin install easybr-search@easy-search-tools
+```
+
+## Claude Desktop / MCP
+
+Download `easyserp-1.0.0.mcpb` from the [1.0.0 release](https://github.com/aiispower/easyserp/releases/tag/v1.0.0), import it in an MCPB-compatible client, and configure your API key. Runtime dependencies are bundled; Node.js 20+ is required. See the [MCPB guide](docs/MCPB.md).
+
+Version `1.0.0` is active in the [official MCP Registry](https://registry.modelcontextprotocol.io/v0.1/servers/io.github.aiispower%2Feasyserp/versions/1.0.0).
 
 ## Get started
 

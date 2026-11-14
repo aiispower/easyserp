@@ -6,11 +6,11 @@ EasySERP is distributed as a standalone MCP Bundle (`.mcpb`) for Claude Desktop 
 
 Download `easyserp-1.0.0.mcpb` from the GitHub release, then open the file with Claude Desktop or import it in a compatible MCP client. Add an EasySERP API key in the extension configuration to run searches. The key is stored as a sensitive setting and passed to the local server through `EASYSERP_API_KEY`. The capabilities tool works without a key.
 
-The MCPB release URL is planned as:
+Download the MCPB release:
 
 `https://github.com/aiispower/easyserp/releases/download/v1.0.0/easyserp-1.0.0.mcpb`
 
-The official MCP Registry metadata is in the adjacent `server.json`. Its package URL and SHA-256 are prepared for the planned GitHub Release; the asset is not available until the maintainer uploads it.
+The official MCP Registry metadata is in the adjacent `server.json`. Its package URL and SHA-256 match the uploaded GitHub Release asset. Registry review and publication status are recorded separately in [PUBLICATION-STATUS.md](PUBLICATION-STATUS.md).
 
 ## Tools
 
@@ -31,4 +31,4 @@ node scripts/build-mcpb.mjs
 
 This invokes the official public `@anthropic-ai/mcpb` CLI through `npx`, stages only the allowlisted runtime files, validates and packs the extension, performs an offline MCP protocol smoke test, computes SHA-256, and updates `server.json`. It does not upload or publish anything. Build details and file inventories are written under `.local/distribution-20261114/mcpb/`.
 
-The MCPB manifest follows the official MCPB 0.3 format. The registry metadata uses `registryType: "mcpb"`, a planned GitHub Release URL, and the artifact SHA-256 required by the official MCP Registry. Registry submission and release upload are separate maintainer actions.
+The MCPB manifest follows the official MCPB 0.3 format. The registry metadata uses `registryType: "mcpb"`, the GitHub Release URL, and the artifact SHA-256 required by the official MCP Registry. Registry submission and release upload are separate maintainer actions.

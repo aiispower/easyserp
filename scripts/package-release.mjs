@@ -17,10 +17,12 @@ for platform in ['skillhub','clawhub']:
    rel=p.relative_to(skill).as_posix()
    if p.is_symlink() or rel.startswith('.') or any(a in rel.split('/') for a in ['node_modules','.local','.private','__pycache__']):raise RuntimeError('Unexpected private artifact in Skill')
    data=p.read_bytes()
+   if platform=='skillhub' and rel=='SKILL.md':data=data.replace(b'![easyserp](assets/easyserp-icon.png)\n\n',b'')
    if platform=='clawhub' and rel=='LICENSE':data=license0.encode()
    if rel=='package.json' and platform=='clawhub':
     d=json.loads(data);d['license']='MIT-0';data=(json.dumps(d,indent=2)+'\n').encode()
-   info=zipfile.ZipInfo(rel,(2026,11,14,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=0o644<<16
+   archive_rel='LICENSE.md' if platform=='skillhub' and rel=='LICENSE' else rel
+   info=zipfile.ZipInfo(archive_rel,(2026,11,14,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED;info.external_attr=0o644<<16
    z.writestr(info,data)
  rows.append({'artifact':out.name,'sha256':hashlib.sha256(out.read_bytes()).hexdigest(),'bytes':out.stat().st_size,'status':'prepared_not_submitted','license':'MIT-0' if platform=='clawhub' else 'MIT'})
 out=dist/'easyserp-1.0.0-claude-plugin.zip'
