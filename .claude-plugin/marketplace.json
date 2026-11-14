@@ -15,8 +15,8 @@
     {
       "name": "easybr-search",
       "source": {
-        "source": "github",
-        "repo": "aiispower/easybrSearch"
+        "source": "url",
+        "url": "https://github.com/aiispower/easybrSearch.git"
       },
       "description": "Free browser search and source reading across web and media platforms."
     }
