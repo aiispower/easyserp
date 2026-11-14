@@ -1,0 +1,22 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.aiispower/easyserp",
+  "title": "easyserp",
+  "description": "Search Google and Bing through MCP with source-domain filters and safe request recovery.",
+  "version": "1.0.0",
+  "websiteUrl": "https://serp.skyvora.cc",
+  "repository": {
+    "source": "github",
+    "url": "https://github.com/aiispower/easyserp"
+  },
+  "packages": [
+    {
+      "registryType": "mcpb",
+      "identifier": "https://github.com/aiispower/easyserp/releases/download/v1.0.0/easyserp-1.0.0.mcpb",
+      "fileSha256": "6b9b5b405f124c199e7f6ea18fd87d8f738f8bdb73c5759662a6e08468978809",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}

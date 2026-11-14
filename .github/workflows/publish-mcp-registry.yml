@@ -1,0 +1,106 @@
+name: Publish to MCP Registry
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mcp-registry-publish-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      MCP_PUBLISHER_VERSION: v1.8.9
+      MCP_PUBLISHER_ARCHIVE: mcp-publisher_linux_amd64.tar.gz
+      MCP_PUBLISHER_ARCHIVE_SHA256: 4d527ca8f1ced0394c962dc925c2a4a4addef441cbefd62501c875e9481823a8
+      MCP_PUBLISHER_SHA256: 5ee8982edd527a3e008c8c7e0ba0c4b98edf7f80f2d2a8689b3fedc89f54825e
+      CHECKSUMS_SHA256: 87392b09d5b8ef07269e6bc7f6b05b56dcec0bad4a73c8899e2692ef5519820d
+      EXPECTED_SERVER_NAME: io.github.aiispower/easyserp
+      EXPECTED_SERVER_VERSION: 1.0.0
+      EXPECTED_MCPB_URL: https://github.com/aiispower/easyserp/releases/download/v1.0.0/easyserp-1.0.0.mcpb
+      EXPECTED_MCPB_SHA256: 6b9b5b405f124c199e7f6ea18fd87d8f738f8bdb73c5759662a6e08468978809
+
+    steps:
+      - name: Check out release metadata
+        uses: actions/checkout@v5
+
+      - name: Verify server metadata and released MCPB
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          jq -e \
+            --arg name "$EXPECTED_SERVER_NAME" \
+            --arg version "$EXPECTED_SERVER_VERSION" \
+            --arg url "$EXPECTED_MCPB_URL" \
+            --arg sha "$EXPECTED_MCPB_SHA256" \
+            '.name == $name
+             and .version == $version
+             and (.packages | length) == 1
+             and .packages[0].registryType == "mcpb"
+             and .packages[0].identifier == $url
+             and .packages[0].fileSha256 == $sha
+             and .packages[0].transport.type == "stdio"' \
+            server.json >/dev/null
+
+          curl --fail --location --silent --show-error \
+            --retry 3 --retry-all-errors \
+            --output easyserp-1.0.0.mcpb \
+            "$EXPECTED_MCPB_URL"
+
+          actual_sha="$(sha256sum easyserp-1.0.0.mcpb | cut -d ' ' -f1)"
+          if [[ "$actual_sha" != "$EXPECTED_MCPB_SHA256" ]]; then
+            echo "MCPB release asset digest does not match server.json" >&2
+            exit 1
+          fi
+
+      - name: Download and verify pinned mcp-publisher
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          base_url="https://github.com/modelcontextprotocol/registry/releases/download/${MCP_PUBLISHER_VERSION}"
+          curl --fail --location --silent --show-error \
+            --retry 3 --retry-all-errors \
+            --output registry_1.8.9_checksums.txt \
+            "$base_url/registry_1.8.9_checksums.txt"
+          printf '%s  %s\n' "$CHECKSUMS_SHA256" registry_1.8.9_checksums.txt | sha256sum --check --status
+
+          curl --fail --location --silent --show-error \
+            --retry 3 --retry-all-errors \
+            --output "$MCP_PUBLISHER_ARCHIVE" \
+            "$base_url/$MCP_PUBLISHER_ARCHIVE"
+          checksum_entries="$(awk -v archive="$MCP_PUBLISHER_ARCHIVE" '$2 == archive { count++ } END { print count + 0 }' registry_1.8.9_checksums.txt)"
+          if [[ "$checksum_entries" != "1" ]]; then
+            echo "Expected exactly one publisher checksum entry" >&2
+            exit 1
+          fi
+          release_sha="$(awk -v archive="$MCP_PUBLISHER_ARCHIVE" '$2 == archive { print $1 }' registry_1.8.9_checksums.txt)"
+          if [[ "$release_sha" != "$MCP_PUBLISHER_ARCHIVE_SHA256" ]]; then
+            echo "Publisher checksum manifest differs from the pinned digest" >&2
+            exit 1
+          fi
+          printf '%s  %s\n' "$release_sha" "$MCP_PUBLISHER_ARCHIVE" | sha256sum --check --status
+
+          tar -xzf "$MCP_PUBLISHER_ARCHIVE" mcp-publisher
+          chmod +x mcp-publisher
+          publisher_sha="$(sha256sum mcp-publisher | cut -d ' ' -f1)"
+          if [[ "$publisher_sha" != "$MCP_PUBLISHER_SHA256" ]]; then
+            echo "Extracted mcp-publisher binary digest is unexpected" >&2
+            exit 1
+          fi
+
+      - name: Authenticate to MCP Registry with GitHub OIDC
+        run: ./mcp-publisher login github-oidc
+
+      - name: Publish server metadata
+        run: ./mcp-publisher publish

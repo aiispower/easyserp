@@ -1,0 +1,52 @@
+{
+  "manifest_version": "0.3",
+  "name": "easyserp",
+  "display_name": "easyserp",
+  "version": "1.0.0",
+  "description": "Search Google and Bing from MCP clients with source filtering and safe recovery.",
+  "long_description": "EasySERP provides Google and Bing search through an MCP server. Search requests use a private API key, preserve request receipts for recovery, and return real search titles, snippets, and links. Domain filters are applied to returned URLs. A normal successful search is submitted once.",
+  "author": {
+    "name": "aiispower",
+    "url": "https://github.com/aiispower"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aiispower/easyserp.git"
+  },
+  "homepage": "https://serp.skyvora.cc",
+  "documentation": "https://github.com/aiispower/easyserp/blob/main/docs/MCPB.md",
+  "support": "https://github.com/aiispower/easyserp/issues",
+  "icon": "assets/easyserp-icon.png",
+  "server": {
+    "type": "node",
+    "entry_point": "src/mcp.mjs",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/src/mcp.mjs"],
+      "env": {
+        "EASYSERP_API_KEY": "${user_config.api_key}"
+      }
+    }
+  },
+  "tools": [
+    { "name": "easyserp_search", "description": "Search Google or Bing with bounded retries and optional source-domain filters." },
+    { "name": "easyserp_batch_search", "description": "Search several queries with bounded concurrency and ordered partial results." },
+    { "name": "easyserp_request", "description": "Read a known search request receipt without submitting a new search." },
+    { "name": "easyserp_capabilities", "description": "Show engines, setup, and pricing without an API key or search request." }
+  ],
+  "keywords": ["search", "google", "bing", "serp", "research"],
+  "license": "MIT",
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": { "node": ">=20.0.0" }
+  },
+  "user_config": {
+    "api_key": {
+      "type": "string",
+      "title": "EasySERP API key",
+      "description": "Paste your EasySERP key from https://serp.skyvora.cc. Stored as a masked secret and passed only to this local server process.",
+      "sensitive": true,
+      "required": false
+    }
+  }
+}

@@ -1,0 +1,14 @@
+# The build script uses a strict allowlist. These exclusions are kept here as an auditable safeguard.
+.git/
+.local/
+.private/
+node_modules/.cache/
+tests/
+coverage/
+.env
+.env.*
+.npmrc
+*.log
+*.tgz
+*.zip
+*.mcpb
